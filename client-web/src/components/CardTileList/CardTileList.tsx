@@ -11,7 +11,8 @@ export function CardTileList({ cards }: CardTileListProps) {
     return <Grid container
         rowSpacing={2}
         columnSpacing={3}
-        alignContent={"center"}>
+        alignContent={"center"}
+        justifyContent="center">
         {cards.map((card, i) => {
             return (
                 <Grid item>
