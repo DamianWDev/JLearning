@@ -6,6 +6,7 @@ import Modal from '@mui/material/Modal';
 import { FloatingFab } from '../FloatingAddButton/FloatingFab';
 import { Grid, Input, makeStyles, Paper, styled, TextField } from '@mui/material';
 import { height } from '@mui/system';
+import { UploadImage } from './UploadImage';
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -139,14 +140,7 @@ export function AddMangaModal() {
                         >IMAGE</Typography>
                     </Grid>
                     <Grid item xs={12}>
-                        <Box style={{
-                            borderRadius: "5px",
-                            height: '228px',
-                            width: '228px',
-                            border: '1px solid #fff',
-                        }}>
-                            <img src="https://w7.pngwing.com/pngs/754/356/png-transparent-stroke-order-chinese-characters-japanese-fire-japanese-leaf-monochrome-silhouette.png" alt="manga" style={{ width: "100%", borderRadius: "5px", height: "228px" }} />
-                        </Box>
+                        <UploadImage />
                     </Grid>
                 </Grid>
             </div>

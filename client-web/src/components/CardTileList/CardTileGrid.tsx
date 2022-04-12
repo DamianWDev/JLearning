@@ -37,16 +37,6 @@ function generatePlacholder() {
             { image: "https://static.wikia.nocookie.net/jujutsu-kaisen/images/3/31/Volume_4.png", title: "JUJUTSU" },
             { image: "https://static.wikia.nocookie.net/hunterxhunter/images/4/45/Volume0cover.jpg", title: "HUNTER X HUNTER" },
             { image: "https://source.unsplash.com/random", title: "Random Image" },
-            { image: "https://source.unsplash.com/random", title: "Random Image" },
-            { image: "https://source.unsplash.com/random", title: "Random Image" },
-            { image: "https://source.unsplash.com/random", title: "Random Image" },
-            { image: "https://source.unsplash.com/random", title: "Random Image" },
-            { image: "https://source.unsplash.com/random", title: "Random Image" },
-            { image: "https://source.unsplash.com/random", title: "Random Image" },
-            { image: "https://source.unsplash.com/random", title: "Random Image" },
-            { image: "https://source.unsplash.com/random", title: "Random Image" },
-            { image: "https://source.unsplash.com/random", title: "Random Image" },
-            { image: "https://source.unsplash.com/random", title: "Random Image" },
         ]
     }
 }

@@ -12,9 +12,9 @@ import SearchIcon from '@mui/icons-material/Search';
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: "50px",
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    backgroundColor: alpha("#fff", 0.15),
     '&:hover': {
-        backgroundColor: alpha(theme.palette.common.white, 0.25),
+        backgroundColor: alpha("#fff", 0.25),
     },
     marginLeft: 0,
     width: '100%',
