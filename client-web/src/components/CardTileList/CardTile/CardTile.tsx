@@ -9,10 +9,7 @@ interface CardTileProps {
 }
 
 export function CardTile({ image, title }: CardTileProps) {
-    return <div
-        style={{
-            width: "150px"
-        }}>
+    return <div style={{ width: "150px" }}>
         <CardTileImage
             imageUrl={image}
             title={title}

@@ -40,6 +40,28 @@ const ItemH = styled(Paper)(({ theme }) => ({
     height: '190px',
 }));
 
+const StyledTextField = styled(TextField)((theme) => ({
+    root: {
+        width: 300,
+        "& .MuiInputBase-root": {
+            color: "green",
+            height: 60
+        }
+    }
+}));
+
+// generate styled textfield with white text color override
+const styles = {
+    root: {
+        background: "black"
+    },
+    input: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center" as 'center'
+    }
+};
+
 export function AddMangaModal() {
 
     return <Box sx={style}>
@@ -65,7 +87,8 @@ export function AddMangaModal() {
                     </Grid>
                     <Grid item xs={4}>
                         <TextField
-                            color="primary"
+                            type='text'
+                            inputProps={{ style: styles.input }}
                             id="outlined-basic"
                             label="CHARACTER"
                             variant="outlined"

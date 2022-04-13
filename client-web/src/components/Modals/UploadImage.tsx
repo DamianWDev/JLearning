@@ -1,25 +1,30 @@
-import { Label } from "@material-ui/icons";
-import { Button, Fab } from "@mui/material";
-import { Box, styled, width } from "@mui/system";
-import { Fragment, useState } from "react";
+import { styled } from "@mui/system";
+import { useState } from "react";
 import AddIcon from '@mui/icons-material/Add';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-
+import { useDropzone } from "react-dropzone";
 
 export function UploadImage() {
-
     const [img, setImg] = useState("");
     const [isVisible, setIsVisible] = useState(true);
+    const { getRootProps, getInputProps } = useDropzone({
+        accept: "image/*",
+        onDrop: acceptedFiles => {
+            const file = acceptedFiles[0];
+            const reader = new FileReader();
+            console.log("halo");
+            setImg(URL.createObjectURL(file));
+            setIsVisible(false);
+        }
+    });
 
-    const onChange = (e: any) => {
-
+    const onChange = function (e: any) {
         setImg(URL.createObjectURL(e.target.files[0]));
         setIsVisible(false);
         console.log(e.target.files[0]);
     };
 
     const StyledDiv = styled('div')(({ theme }) => ({
-        border: "2px solid #fff",
+        border: "2px solid red",
         borderRadius: "5px",
         height: "230px",
         width: "230px",
@@ -44,29 +49,29 @@ export function UploadImage() {
     }));
 
     return (
+        <div>
+            <StyledDiv {...getRootProps()} >
+                <input
+                    id="icon-button-file"
+                    accept="image/*"
+                    onClick={onChange}
+                    type="file"
+                    {...getInputProps()}
+                />
 
-        <StyledDiv>
-            <input
-                id="icon-button-file"
-                accept="image/*"
-                type="file"
-                onChange={onChange}
-                hidden
-            />
+                {isVisible && (
+                    <AddButton
+                        htmlFor="icon-button-file">
+                        <AddIcon fontSize={"large"} />
+                    </AddButton>)}
 
-            {isVisible && (
-                <AddButton htmlFor="icon-button-file">
-                    <AddIcon fontSize={"large"} />
-                </AddButton>)
-            }
-
-            {!isVisible && (
-                <StyledImg
-                    src={img}
-                    height="230px"
-                    width="230px" />)
-            }
-        </StyledDiv >
+                {!isVisible && (
+                    <StyledImg
+                        src={img}
+                        height="230px"
+                        width="230px" />)}
+            </StyledDiv >
+        </div>
 
     );
 }
