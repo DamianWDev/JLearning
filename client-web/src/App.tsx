@@ -3,6 +3,7 @@ import { CardTileGrid } from './components/CardTileList/CardTileGrid';
 import Navbar from './components/Navbar/Navbar';
 import { FloatingFab } from './components/FloatingAddButton/FloatingFab';
 import { createTheme, ThemeProvider } from '@mui/material';
+import { Overlap } from './components/Overlap';
 
 
 declare module '@mui/material/styles' {
