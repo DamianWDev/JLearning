@@ -11,6 +11,7 @@ declare module '@mui/material/styles' {
     palette: {
       primary: {
         main: string;
+        light: string;
       }
     },
     input: {
@@ -23,7 +24,8 @@ declare module '@mui/material/styles' {
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#F3782C"
+      main: "#F3782C",
+      light: "#F4883C",
     }
   }
 });

@@ -7,6 +7,7 @@ import { FloatingFab } from '../FloatingAddButton/FloatingFab';
 import { Grid, Input, makeStyles, Paper, styled, TextField } from '@mui/material';
 import { height } from '@mui/system';
 import { UploadImage } from './UploadImage';
+import { BasicTable } from './TranslationTable';
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -173,8 +174,8 @@ export function AddMangaModal() {
             marginTop: "10px",
         }}>
             <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <Item>xs=12</Item>
+                <Grid item xs={12} marginTop="20px">
+                    <BasicTable />
                 </Grid>
             </Grid>
         </div>

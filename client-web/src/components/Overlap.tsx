@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 interface Overlap {
     base: React.ReactNode;
-    overlay: React.ReactNode;
+    overlay?: React.ReactNode;
 }
 
 export function Overlap({ base, overlay }: Overlap) {
@@ -38,8 +38,8 @@ export function Overlap({ base, overlay }: Overlap) {
                     position: "absolute",
                 }}>
             </div>
-            {isHovering && (
-                <div
+            {isHovering &&
+                (<div
                     style={{
                         position: "absolute",
                     }}>
