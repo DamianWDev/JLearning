@@ -36,7 +36,7 @@ export function UploadImage() {
             alignItems: "center",
             position: "absolute",
             "&:hover": {
-                backgroundColor: "orange",
+                backgroundColor: "#F3782C",
             }
         }
     }))
@@ -49,10 +49,11 @@ export function UploadImage() {
             justifyContent: "center",
             alignItems: "center",
             borderRadius: "5%",
-            border: `2px dashed  white`,
+            border: `2px dashed #F3782C`,
             height: "230px",
             width: "230px",
-            position: "absolute"
+            position: "absolute",
+            backgroundColor: "#212121",
         }} {...getRootProps()} >
             <input {...getInputProps()} />
             {
@@ -67,10 +68,10 @@ export function UploadImage() {
                     setImg("")
                 }
                 src={img}
-                height="230px;"
-                width="230px"
+                height="220px;"
+                width="220px"
                 style={{
-                    borderRadius: "5px",
+                    borderRadius: "10px",
                     position: "relative",
                     display: "flex",
                     justifyContent: "center",

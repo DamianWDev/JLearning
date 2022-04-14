@@ -15,57 +15,52 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 600,
-    bgcolor: '#1D1D1D',
-    border: '1px solid #fff',
+    bgcolor: '#141414',
     borderRadius: "5px",
-    boxShadow: 24,
+    //popup box shadow
+    boxShadow: "0px 0px 15px 5px #000",
     p: 4,
     display: 'flex',
     flexDirection: 'column',
 };
 
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: '#1D1D1D',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: 'white',
-}));
-
-const ItemH = styled(Paper)(({ theme }) => ({
-    backgroundColor: '#1D1D1D',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: 'white',
-    height: '190px',
-}));
-
-const StyledTextField = styled(TextField)((theme) => ({
-    root: {
-        width: 300,
-        "& .MuiInputBase-root": {
-            color: "green",
-            height: 60
-        }
-    }
-}));
-
 // generate styled textfield with white text color override
 const styles = {
     root: {
-        background: "black"
+        background: "black",
+        color: "white",
     },
     input: {
+        color: "black",
+        textAlign: "center" as 'center',
+    },
+    label: {
         color: "white",
         fontWeight: "bold",
-        textAlign: "center" as 'center'
+        textAlign: "center" as 'center',
     }
 };
 
+
+
+const TextFieldStyled = styled(TextField)(({ theme }) => ({
+    width: "100%",
+    FieldSet: {
+        borderColor: `${theme.palette.primary.main} !important`,
+    },
+    Label: {
+        color: "white !important"
+    },
+    input: {
+        color: '#afafaf',
+        textAlign: "center" as 'center',
+        backgroundColor: "#151515",
+    }
+}));
+
 export function AddMangaModal() {
 
-    return <Box sx={style}>
+    return <Paper sx={style}>
         <div style={{
             display: 'flex',
             flexDirection: 'row',
@@ -81,72 +76,51 @@ export function AddMangaModal() {
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <Typography
-                            color="primary"
                             variant="h5"
                             textAlign="center"
+                            color="#fff"
                         >INFORMATION</Typography>
                     </Grid>
                     <Grid item xs={4}>
-                        <TextField
-                            type='text'
-                            inputProps={{ style: styles.input }}
-                            id="outlined-basic"
+                        <TextFieldStyled
+                            size="small"
                             label="CHARACTER"
-                            variant="outlined"
-                            size="small"
-                            fullWidth
                             focused
                         />
                     </Grid>
                     <Grid item xs={4}>
-                        <TextField
-                            color="primary"
-                            id="outlined-basic"
+                        <TextFieldStyled
                             label="STROKES"
-                            variant="outlined"
                             size="small"
-                            fullWidth
                             focused
                         />
                     </Grid>
                     <Grid item xs={4}>
-                        <TextField
-                            color="primary"
-                            id="outlined-basic"
+                        <TextFieldStyled
                             label="LEVEL"
-                            variant="outlined"
                             size="small"
-                            fullWidth
                             focused
                         />
                     </Grid>
                     <Grid item xs={12}>
                         <Typography
-                            color="primary"
+                            color="#fff"
                             variant="h5"
                             textAlign="center"
                             marginTop="30px"
                         >READINGS</Typography>
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField
-                            color="primary"
-                            id="outlined-basic"
+                        <TextFieldStyled
                             label="KUN-YOMI"
-                            variant="outlined"
                             size="small"
-                            fullWidth
                             focused
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField
-                            color="primary"
-                            id="outlined-basic"
+                        <TextFieldStyled
                             label="ON-YOMI"
-                            variant="outlined"
                             size="small"
-                            fullWidth
                             focused
                         />
                     </Grid>
@@ -158,7 +132,7 @@ export function AddMangaModal() {
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <Typography
-                            color="primary"
+                            color="#fff"
                             variant="h5"
                             textAlign="center"
                         >IMAGE</Typography>
@@ -177,7 +151,21 @@ export function AddMangaModal() {
                 <Grid item xs={12} marginTop="20px">
                     <BasicTable />
                 </Grid>
+                <Grid item xs={12}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        size="large"
+                        style={{
+                            color: "white",
+                            fontWeight: "bold",
+                            width: "100%",
+                        }}
+                    >
+                        SAVE
+                    </Button>
+                </Grid>
             </Grid>
         </div>
-    </Box>
+    </Paper>
 }

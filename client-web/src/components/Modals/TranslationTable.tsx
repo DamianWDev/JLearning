@@ -6,7 +6,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Button, TextField } from '@mui/material';
+import { Button, TextField, Typography } from '@mui/material';
+import { borderBottom } from '@mui/system';
 
 function createData(
     id: number,
@@ -24,17 +25,18 @@ const rows = [
 
 export function BasicTable() {
     return (
-        <TableContainer component={Paper} style={{
-            borderRadius: "10px",
-            border: "1px solid #fff",
+        <TableContainer style={{
+            borderRadius: "15px",
+            border: "1px solid #333",
+            boxShadow: "0px 0px 35px 2px #181818",
         }}>
-            <Table aria-label="simple table">
+            <Table aria-label="simple table" >
                 <TableHead>
-                    <TableRow style={{ backgroundColor: '#111' }}>
-                        <TableCell align="center" style={{ color: 'white' }}>MEANING</TableCell>
+                    <TableRow style={{ backgroundColor: '#111'}}>
+                        <TableCell align="center" style={{ color: 'white', borderColor: "#333"  }}><Typography variant={"h5"}>TRANSLATION</Typography></TableCell>
                     </TableRow>
                     <TableRow style={{ backgroundColor: '#111' }}>
-                        <TableCell align="left" style={{ color: 'white' }}>
+                        <TableCell align="left" style={{ color: 'white', borderColor: "#333" }}>
                             <TextField
                                 color="primary"
                                 id="outlined-basic"
@@ -54,6 +56,7 @@ export function BasicTable() {
                                     height: "40px",
                                     color: 'white',
                                     marginLeft: '10px',
+                                    fontWeight: 'bold',
                                 }}
                             >
                                 ADD
@@ -68,7 +71,7 @@ export function BasicTable() {
                             style={{ backgroundColor: '#161616' }}
                         >
                             <TableCell
-                                style={{ color: 'white' }}
+                                style={{ color: 'white', borderColor: "#F3782C" }}
                                 align="left">{row.translation}</TableCell>
                         </TableRow>
                     ))}
