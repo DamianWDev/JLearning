@@ -5,6 +5,7 @@ from sqlalchemy import Integer, String, Unicode, ForeignKey
 
 Base = declarative_base()
 
+
 # Relationships
 
 
@@ -15,20 +16,44 @@ class KanjiOccurrence(Base):
     volume_id = Column(ForeignKey('volume.id'), primary_key=True)
     kanji_id = Column(ForeignKey('kanji.id'), primary_key=True)
 
-    kanji = relationship("Kanji", back_populates="volumes")
-    volume = relationship("Volume", back_populates="kanjis")
+    kanji_kanji_occurrence = relationship("Kanji", back_populates="volumes")
+    volume_kanji_occurrence = relationship("Volume", back_populates="kanjis")
 
 
+# TODO: finish this
 class Pronunciation(Base):
     __tablename__ = 'pronunciation'
 
     id = Column(Integer, primary_key=True)
     type = Column(String(16))
     pronoun = Column(String(64))
+    kanji_id = Column(Integer, ForeignKey('kanji.id'))
 
-    kanji_id = Column(ForeignKey('kanji.id'), primary_key=True)
 
-    kanji = relationship("Kanji", back_populates="volumes")
+# TODO: finish this
+# class Meaning(Base):
+#     __tablename__ = 'meaning'
+#
+#     id = Column(Integer, primary_key=True)
+#     meaning = Column(String(255))
+#     kanji_id = Column(ForeignKey('kanji.id'), primary_key=True)
+#     word_id = Column(ForeignKey('word.id'), primary_key=True)
+#
+#     kanji_meaning = relationship("Kanji", back_populates="words")
+#     word_meaning = relationship("Words", back_populates="kanjis")
+
+
+# TODO: finish this
+# class Categorization(Base):
+#     __tablename__ = 'categorization'
+#
+#     id = Column(Integer, primary_key=True)
+#     category_id = Column(ForeignKey('category.id', primary_key=True))
+#     word_id = Column(ForeignKey('word.id', primary_key=True))
+#     kanji_id = Column(ForeignKey('kanji.id', primary_key=True))
+#
+#     kanji = relationship("Kanji", back_populates="volumes")
+
 
 # Models
 
@@ -56,7 +81,7 @@ class Volume(Base):
     manga_id = Column(Integer)
     img_path = Column(String(255))
 
-    kanjis = relationship("KanjiOccurrence", back_populates="volume")
+    kanjis = relationship("KanjiOccurrence", back_populates="volume_kanji_occurrence")
 
     def __repr__(self):
         return f"""
@@ -77,7 +102,9 @@ class Kanji(Base):
     img_path = Column(String(255))
     url = Column(String(255))
 
-    volumes = relationship("KanjiOccurrence", back_populates="kanji")
+    volumes = relationship("KanjiOccurrence", back_populates='kanji_kanji_occurrence')
+    pronunciations = relationship("Pronunciation", back_populates="kanji")
+    # words = relationship("Meaning", back_populates='word_meaning')
 
     def __repr__(self):
         return f"""
@@ -96,6 +123,8 @@ class Word(Base):
     id = Column(Integer, primary_key=True)
     word = Column(Unicode(32))
     url = Column(String(255))
+
+    # meanings = relationship('Meaning', back_populates='word')
 
     def __repr__(self):
         return f"""
