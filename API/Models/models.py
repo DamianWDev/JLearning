@@ -16,8 +16,8 @@ class KanjiOccurrence(Base):
     volume_id = Column(ForeignKey('volume.id'), primary_key=True)
     kanji_id = Column(ForeignKey('kanji.id'), primary_key=True)
 
-    kanji_kanji_occurrence = relationship("Kanji", back_populates="volumes")
-    volume_kanji_occurrence = relationship("Volume", back_populates="kanjis")
+    kanji_kanji_occurrence = relationship("Kanji", back_populates="kanji_occurrence_collection")
+    volume_kanji_occurrence = relationship("Volume", back_populates="kanji_occurrence_collection")
 
 
 class Pronunciation(Base):
@@ -37,8 +37,8 @@ class Meaning(Base):
     kanji_id = Column(ForeignKey('kanji.id'), primary_key=True)
     word_id = Column(ForeignKey('word.id'), primary_key=True)
 
-    kanji_meaning = relationship("Kanji", back_populates="words")
-    word_meaning = relationship("Words", back_populates="kanjis")
+    kanji_meaning = relationship("Kanji", back_populates="meaning_collection")
+    word_meaning = relationship("Words", back_populates="meaning_collection")
 
 
 class Categorization(Base):
@@ -80,7 +80,7 @@ class Volume(Base):
     manga_id = Column(Integer)
     img_path = Column(String(255))
 
-    kanjis = relationship("KanjiOccurrence", back_populates="volume_kanji_occurrence")
+    kanji_occurrence_collection = relationship("KanjiOccurrence", back_populates="volume_kanji_occurrence")
 
     def __repr__(self):
         return f"""
@@ -101,10 +101,9 @@ class Kanji(Base):
     img_path = Column(String(255))
     url = Column(String(255))
 
-    volumes = relationship("KanjiOccurrence", back_populates='kanji_kanji_occurrence')
-    pronunciations = relationship("Pronunciation", back_populates="kanji_id")
-    # meanings = relationship("Meanings", back_populates="kanji_id")
-    words = relationship("Meaning", back_populates='kanji_meaning')
+    kanji_occurrence_collection = relationship("KanjiOccurrence", back_populates='kanji_kanji_occurrence')
+    pronunciation_collection = relationship("Pronunciation", back_populates="kanji_id")
+    meaning_collection = relationship("Meaning", back_populates='kanji_meaning')
     categorization_collection = relationship("Categorization", back_populates="kanji_categorization")
 
     def __repr__(self):
@@ -125,7 +124,7 @@ class Word(Base):
     word = Column(Unicode(32))
     url = Column(String(255))
 
-    kanjis = relationship('Meaning', back_populates='word_meaning')
+    meaning_collection = relationship("Meaning", back_populates='word_meaning')
     categorization_collection = relationship("Categorization", back_populates="word_categorization")
 
     def __repr__(self):
