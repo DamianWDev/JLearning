@@ -4,6 +4,32 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: python:3.10.4-slim-buster
+    image: ubuntu:22.04
+    restart: always
     ports:
       - "80:80"
+      - "5000:5000"
+    networks:
+      - server-network
+    depends_on:
+      - db
+  db:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - server-network
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=database
+networks:
+  server-network:
+    driver: bridge
+
+volumes:
+    postgres_data:
+        driver: local
