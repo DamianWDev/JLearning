@@ -90,7 +90,10 @@ def allowed_file(filename):
 @app.route('/manga', methods=['POST', 'GET'])
 def add_maga():
     filename = request.args.get('filename', None)
-    
+
+    if not os.path.exists(UPLOAD_FOLDER):
+        os.mkdir(UPLOAD_FOLDER)
+
     if request.method == 'POST' and not filename:
         if 'file' not in request.files:
             flash('No file part')
