@@ -29,89 +29,36 @@ def db_test():
     Base.metadata.create_all(engine)
     print("Created structure")
 
-    # print("Toooo")
-    # meta = MetaData(db)
-    #
-    # film_table = Table('films', meta,
-    #                    Column('title', String),
-    #                    Column('director', String),
-    #                    Column('year', String))
-    #
-    # with db.connect() as conn:
-    #     # Create
-    #
-    #
-    #
-    #     film_table.create(checkfirst=True)
-    #     insert_statement = film_table.insert().values(title="Doctor Strange", director="Scott Derrickson", year='2020')
-    #     conn.execute(insert_statement)
-    #
-    #     # Read
-    #     select_statement = film_table.select()
-    #     result_set = conn.execute(select_statement)
-    #     for r in result_set:
-    #         print(r)
-    #
-    #     # Update
-    #     update_statement = film_table.update().where(film_table.c.year == "2016").values(title="Some2016Film")
-    #     conn.execute(update_statement)
-    #
-    #     # Delete
-    #     delete_statement = film_table.delete().where(film_table.c.year == "2016")
-    #     conn.execute(delete_statement)
-    #
-    #     # Delete Table
-    #     film_table.drop(checkfirst=True)
 
-
-@app.route('/query-example')
-def query_example():
-    return 'Query String Example'
-
-
-@app.route('/form-example')
-def form_example():
-    return 'Form Data Example'
-
-
-@app.route('/json-example')
-def json_example():
-    return jsonify({
-        'name': 'Dybek',
-        'Surname': 'Jebany'
-    })
-
-
-def allowed_file(filename):
+def allowed_file(filename: str) -> bool:
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@app.route('/manga', methods=['POST', 'GET'])
-def add_maga():
-    filename = request.args.get('filename', None)
-
+# TODO: Correct route to point on manga
+@app.route('/manga', methods=['POST'])
+def manga_image():
     if not os.path.exists(UPLOAD_FOLDER):
         os.mkdir(UPLOAD_FOLDER)
 
-    if request.method == 'POST' and not filename:
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return '', 200
-    elif request.method == 'GET' and filename:
-        for file in os.listdir(UPLOAD_FOLDER):
-            if filename == file:
-                return send_file(os.path.join(UPLOAD_FOLDER, file), mimetype='image/gif')
-    else:
-        return '', 405
+    if 'file' not in request.files:
+        flash('No file part')
+        return redirect(request.url)
+    file = request.files['file']
+    if file.filename == '':
+        flash('No selected file')
+        return redirect(request.url)
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        return '', 200
+
+
+@app.route('/manga/<filename>', methods=['GET'])
+def get_manga_image(filename: str) -> Response:
+    for file in os.listdir(UPLOAD_FOLDER):
+        if filename == file:
+            return send_file(os.path.join(UPLOAD_FOLDER, file), mimetype='image/gif')
 
 
 @app.route('/kanji', methods=['GET', 'POST'])
