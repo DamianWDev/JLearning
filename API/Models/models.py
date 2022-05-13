@@ -20,7 +20,6 @@ class KanjiOccurrence(Base):
     volume_kanji_occurrence = relationship("Volume", back_populates="kanjis")
 
 
-# TODO: finish this
 class Pronunciation(Base):
     __tablename__ = 'pronunciation'
 
@@ -30,29 +29,29 @@ class Pronunciation(Base):
     kanji_id = Column(Integer, ForeignKey('kanji.id'))
 
 
-# TODO: finish this
-# class Meaning(Base):
-#     __tablename__ = 'meaning'
-#
-#     id = Column(Integer, primary_key=True)
-#     meaning = Column(String(255))
-#     kanji_id = Column(ForeignKey('kanji.id'), primary_key=True)
-#     word_id = Column(ForeignKey('word.id'), primary_key=True)
-#
-#     kanji_meaning = relationship("Kanji", back_populates="words")
-#     word_meaning = relationship("Words", back_populates="kanjis")
+class Meaning(Base):
+    __tablename__ = 'meaning'
+
+    id = Column(Integer, primary_key=True)
+    meaning = Column(String(255))
+    kanji_id = Column(ForeignKey('kanji.id'), primary_key=True)
+    word_id = Column(ForeignKey('word.id'), primary_key=True)
+
+    kanji_meaning = relationship("Kanji", back_populates="words")
+    word_meaning = relationship("Words", back_populates="kanjis")
 
 
-# TODO: finish this
-# class Categorization(Base):
-#     __tablename__ = 'categorization'
-#
-#     id = Column(Integer, primary_key=True)
-#     category_id = Column(ForeignKey('category.id', primary_key=True))
-#     word_id = Column(ForeignKey('word.id', primary_key=True))
-#     kanji_id = Column(ForeignKey('kanji.id', primary_key=True))
-#
-#     kanji = relationship("Kanji", back_populates="volumes")
+class Categorization(Base):
+    __tablename__ = 'categorization'
+
+    id = Column(Integer, primary_key=True)
+    category_id = Column(ForeignKey('category.id', primary_key=True))
+    word_id = Column(ForeignKey('word.id', primary_key=True))
+    kanji_id = Column(ForeignKey('kanji.id', primary_key=True))
+
+    category_categorization = relationship("Category", back_populates="categorization_collection")
+    word_categorization = relationship("Word", back_populates="categorization_collection")
+    kanji_categorization = relationship("Kanji", back_populates="categorization_collection")
 
 
 # Models
@@ -103,8 +102,10 @@ class Kanji(Base):
     url = Column(String(255))
 
     volumes = relationship("KanjiOccurrence", back_populates='kanji_kanji_occurrence')
-    pronunciations = relationship("Pronunciation", back_populates="kanji")
-    # words = relationship("Meaning", back_populates='word_meaning')
+    pronunciations = relationship("Pronunciation", back_populates="kanji_id")
+    # meanings = relationship("Meanings", back_populates="kanji_id")
+    words = relationship("Meaning", back_populates='kanji_meaning')
+    categorization_collection = relationship("Categorization", back_populates="kanji_categorization")
 
     def __repr__(self):
         return f"""
@@ -124,7 +125,8 @@ class Word(Base):
     word = Column(Unicode(32))
     url = Column(String(255))
 
-    # meanings = relationship('Meaning', back_populates='word')
+    kanjis = relationship('Meaning', back_populates='word_meaning')
+    categorization_collection = relationship("Categorization", back_populates="word_categorization")
 
     def __repr__(self):
         return f"""
@@ -141,6 +143,8 @@ class Category(Base):
     name = Column(String(255))
     color = Column(String(255))
     icon = Column(String(255))
+
+    categorization_collection = relationship("Categorization", back_populates="category_categorization")
 
     def __repr__(self):
         return f"""
