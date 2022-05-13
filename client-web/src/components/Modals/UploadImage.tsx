@@ -68,8 +68,8 @@ export function UploadImage() {
                     setImg("")
                 }
                 src={img}
-                height="220px;"
-                width="220px"
+                height="200px;"
+                width="200px"
                 style={{
                     borderRadius: "10px",
                     position: "relative",

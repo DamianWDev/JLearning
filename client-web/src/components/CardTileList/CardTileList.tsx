@@ -8,16 +8,19 @@ interface CardTileListProps {
 }
 
 export function CardTileList({ cards }: CardTileListProps) {
-    return <Grid container
-        rowSpacing={2}
+    return <Grid container xs={12}
+        rowSpacing={3}
         columnSpacing={3}
-        alignContent={"center"}
         justifyContent="center"
+        direction="row"
     >
+
         {cards.map((card, i) => {
             return (
-                <Grid item>
-                    <CardTile key={i} {...card} />
+                <Grid
+                    item>
+                    <CardTile
+                        key={i} {...card} />
                 </Grid>
             )
         })}

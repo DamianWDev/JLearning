@@ -24,25 +24,6 @@ const style = {
     flexDirection: 'column',
 };
 
-// generate styled textfield with white text color override
-const styles = {
-    root: {
-        background: "black",
-        color: "white",
-    },
-    input: {
-        color: "black",
-        textAlign: "center" as 'center',
-    },
-    label: {
-        color: "white",
-        fontWeight: "bold",
-        textAlign: "center" as 'center',
-    }
-};
-
-
-
 const TextFieldStyled = styled(TextField)(({ theme }) => ({
     width: "100%",
     FieldSet: {
@@ -71,7 +52,6 @@ export function AddMangaModal() {
                 width: "60%",
                 alignItems: "center",
                 justifyContent: "center",
-                // marginTop: "10%"
             }}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>

@@ -7,9 +7,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { AddMangaModal } from '../Modals/AddMangaModal';
 
-interface FloatingFabProps {
 
-}
 
 const floatingStyle = {
     margin: 0,
@@ -33,7 +31,7 @@ const style = {
 };
 
 
-export function FloatingFab(props: FloatingFabProps) {
+export function FloatingFab() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
