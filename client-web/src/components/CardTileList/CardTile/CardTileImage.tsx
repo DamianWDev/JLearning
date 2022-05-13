@@ -1,4 +1,5 @@
 import { styled } from "@mui/system";
+import { useState } from "react";
 
 interface ImgaeCardImageProp {
     imageUrl: string;
@@ -17,7 +18,27 @@ const CardTileImageStyled = styled('img')(({ theme }) => ({
 }));
 
 export function CardTileImage({ imageUrl, title }: ImgaeCardImageProp) {
-    return <CardTileImageStyled
-        src={imageUrl}
-        alt={title} />
+    const [hovered, setHovered] = useState(false);
+
+
+    return <div
+        style={{
+            overflow: 'hidden',
+            height: '250px',
+            borderRadius: '11px',
+            width: '100%',
+            marginBottom: '5px',
+        }}
+        onMouseOver={() => { setHovered(true) }}
+        onMouseOut={() => { setHovered(false) }}
+    >
+        <CardTileImageStyled
+            src={imageUrl}
+            alt={title}
+            style={{
+                transform: `${hovered ? 'scale(1.1,1.1)' : 'scale(1,1)'}`,
+                cursor: `${hovered ? 'pointer' : 'default'}`,
+            }}
+        />
+    </div>
 }
