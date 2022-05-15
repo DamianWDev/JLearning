@@ -1,83 +1,82 @@
-import { Button, Fab, styled } from "@mui/material";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import { CloudUpload } from "@material-ui/icons";
-import { positions } from "@mui/system";
-import CSS from 'csstype';
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles, styled } from "@material-ui/styles";
 
+const useStyle = makeStyles(theme => ({
+    button: {
+        backgroundColor: '#fff',
+        width: "100px",
+        height: "100px",
+        borderRadius: "50%",
+        border: "none",
+        outline: "none",
+        cursor: "pointer",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        position: "absolute",
+        "&:hover": {
+            backgroundColor: "#F3782C",
+        }
+    }
+}))
 
+const ImageStyled = styled("img")(({ theme }) => ({
+    borderRadius: "10px",
+    position: "relative",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+}));
 
-export function UploadImage() {
+interface UploadImageProps {
+    height?: number,
+    width?: number,
+}
+
+export function UploadImage({ height = 230, width = 230 }: UploadImageProps) {
+    const { button } = useStyle();
+    
     const [img, setImg] = useState("");
-
-    const onDrop = useCallback(acceptedFiles => {
+    const onDrop = useCallback(async acceptedFiles => {
         setImg(URL.createObjectURL(acceptedFiles[0]));
     }, [])
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
-    const handleClick = () => {
-        console.log("clicked");
-    }
-
-    const useStyle = makeStyles(theme => ({
-        button: {
-            backgroundColor: '#fff',
-            width: "100px",
-            height: "100px",
-            borderRadius: "50%",
-            border: "none",
-            outline: "none",
-            cursor: "pointer",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            position: "absolute",
-            "&:hover": {
-                backgroundColor: "#F3782C",
-            }
-        }
-    }))
-
-    const { button } = useStyle();
-
     return (
         <div style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            borderRadius: "5%",
-            border: `2px dashed #F3782C`,
-            height: "230px",
-            width: "230px",
-            position: "absolute",
-            backgroundColor: "#212121",
-        }} {...getRootProps()} >
-            <input {...getInputProps()} />
-            {
-                <button
-                    className={button}
-                    onClick={handleClick}>
-                    <CloudUpload />
-                </button>
-            }
-            {img && (<img
-                onClick={() =>
-                    setImg("")
+            width: `${width}px`,
+            height: `${height}px`,
+        }}>
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                borderRadius: "5%",
+                border: `2px dashed #F3782C`,
+                width: `${width}px`,
+                height: `${height}px`,
+                position: "absolute",
+                backgroundColor: "#212121"
+            }} {...getRootProps()} >
+                <input {...getInputProps()} />
+                {
+                    <button
+                        className={button}>
+                        <CloudUpload />
+                    </button>
                 }
-                src={img}
-                height="200px;"
-                width="200px"
-                style={{
-                    borderRadius: "10px",
-                    position: "relative",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
-            />)}
+                {img && (<ImageStyled
+                    src={img}
+                    height={height - 10}
+                    width={width - 10}
+                    onClick={() => {
+                        setImg("")
+                    }}
+                />)}
+            </div>
         </div >
     )
 }

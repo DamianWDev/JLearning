@@ -2,12 +2,10 @@ import { Fab } from '@mui/material';
 import AddIcon from '@material-ui/icons/Add';
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import Button from '@mui/material/Button';  
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { AddMangaModal } from '../Modals/AddMangaModal';
-
-
+import { AddMangaModal } from '../Modals/MangaModal/AddMangaModal';
 
 const floatingStyle = {
     margin: 0,
@@ -29,7 +27,6 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
-
 
 export function FloatingFab() {
     const [open, setOpen] = React.useState(false);
