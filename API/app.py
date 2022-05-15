@@ -2,17 +2,21 @@ import os
 from flask import Flask, jsonify, request, flash, redirect, url_for, Response, send_file
 from flask_restful import Resource, Api
 from sqlalchemy import create_engine
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 from const.consts import DB_STRING, ALLOWED_EXTENSIONS, UPLOAD_FOLDER
 from Models.models import *
-
 
 app = Flask(__name__)
 # api = Api(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = DB_STRING
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = 'super secret key'
+
+# CORS applied on all routes
+CORS(app)
+
 db = SQLAlchemy(app)
 
 
