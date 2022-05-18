@@ -1,13 +1,10 @@
-import * as React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import { Button, styled, TextField, Typography } from '@mui/material';
-import { borderBottom } from '@mui/system';
 import { useState } from 'react';
 
 function createData(
@@ -16,7 +13,7 @@ function createData(
 ) {
     return { id, translation };
 }
-
+//todo remove mock
 const placeholder = [
     createData(0, 'fire'),
     createData(1, 'flame'),
@@ -37,7 +34,7 @@ const TextFieldStyled = styled(TextField)(({ theme }) => ({
     }
 }));
 
-export function BasicTable() {
+export function KanjiTranslationsTable() {
     const [rows, setRows] = useState(placeholder)
     const [translation, setTranslation] = useState("");
 
@@ -48,6 +45,7 @@ export function BasicTable() {
         }
     }
 
+    //todo: refactor
     return (
         <TableContainer style={{
             borderRadius: "15px",
@@ -56,7 +54,6 @@ export function BasicTable() {
             maxHeight: "400px",
             overflow: "auto",
         }}>
-
             <Table stickyHeader aria-label="simple table" >
                 <TableHead>
                     <TableRow style={{ backgroundColor: '#111' }}>
