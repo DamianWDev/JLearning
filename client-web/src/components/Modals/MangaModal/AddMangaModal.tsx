@@ -1,7 +1,8 @@
-import { Button, Grid, Input, Paper, styled, TextField, Typography } from '@mui/material';
-import { height } from '@mui/system';
-import * as React from 'react';
-import { UploadImage } from '../UploadImage';
+import { Grid, Paper, styled, TextField, Typography } from '@mui/material';
+import axios from 'axios';
+import { useState } from 'react';
+import { InputImg } from '../../_Common/InputImg';
+import { SaveButton } from '../../_Common/SaveButton';
 
 const ModalStyle = {
     position: 'absolute' as 'absolute',
@@ -34,14 +35,35 @@ const TextFieldStyled = styled(TextField)(({ theme }) => ({
     }
 }));
 
-const ConfirmButtonStyled = styled(Button)(({ theme }) => ({
-    marginTop: '15px',
-    color: "white",
-    fontWeight: "bold",
-    width: "100%",
-}));
 
-export function AddMangaModal() {
+interface modalProps {
+    handleClose: () => void;
+}
+
+export function AddMangaModal({ handleClose }: modalProps) {
+    const [img, setImg] = useState("");
+    const [mangaName, setmangaName] = useState("");
+
+    //todo: form + validation, waiting for endpoint
+    function CreateManga() {
+        var formData = new FormData();
+        formData.append("file", img)
+        formData.append("name", mangaName)
+        // axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+        // axios.defaults.baseURL = 'http://172.20.0.3:5000';
+        // console.log(formData.getAll("file"), formData.getAll("name"));
+        // axios({
+        //     method: 'POST',
+        //     url: '/manga',
+        //     data: formData,
+        //     withCredentials: false
+        // })
+        console.log('Created Manga!',
+         formData.getAll('file'),
+         formData.getAll('name'),
+         )
+        handleClose();
+    }
 
     return <Paper sx={ModalStyle}>
         <Grid container spacing={2}>
@@ -50,9 +72,11 @@ export function AddMangaModal() {
                 justifyContent="center"
                 alignItems="center"
             >
-                <UploadImage
+                <InputImg
                     height={400}
                     width={250}
+                    img={img}
+                    setImg={setImg}
                 />
             </Grid>
             <Grid item xs={6}
@@ -67,6 +91,7 @@ export function AddMangaModal() {
                     New Manga
                 </Typography>
                 <TextFieldStyled
+                    onChange={(e) => { setmangaName(e.target.value) }}
                     size="small"
                     focused
                 />
@@ -76,13 +101,9 @@ export function AddMangaModal() {
                 justifyContent="center"
                 alignItems="center"
             >
-                <ConfirmButtonStyled
-                    variant="contained"
-                    color="primary"
-                    size="large"
-                >
-                    SAVE
-                </ConfirmButtonStyled>
+                <SaveButton
+                    handleOnClick={CreateManga}
+                />
             </Grid>
         </Grid>
     </Paper >
