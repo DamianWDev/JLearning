@@ -34,7 +34,7 @@ const TextFieldStyled = styled(TextField)(({ theme }) => ({
     }
 }));
 
-export function KanjiTranslationTable() {
+export function KanjiTranslationsTable() {
     const [rows, setRows] = useState(placeholder)
     const [translation, setTranslation] = useState("");
 

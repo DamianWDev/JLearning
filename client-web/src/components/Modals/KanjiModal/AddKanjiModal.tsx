@@ -1,5 +1,5 @@
 import { Grid, Paper, styled } from '@mui/material';
-import { KanjiTranslationTable } from './Components/TranslationTable';
+import { KanjiTranslationsTable } from './Components/KanjiTranslationsTable';
 import { useState } from 'react';
 import { KanjiInfo } from './Components/KanjiInfo';
 import { KanjiReadings } from './Components/KanjiReadings';
@@ -54,7 +54,7 @@ export function AddKanjiModal({ handleClose }: modalProps) {
         </WrapperStyled>
         <Grid container spacing={2}>
             <Grid item xs={12} marginTop="20px">
-                <KanjiTranslationTable />
+                <KanjiTranslationsTable />
             </Grid>
             <Grid item xs={12}>
                 <SaveButton 
