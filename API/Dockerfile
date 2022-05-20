@@ -6,6 +6,7 @@ WORKDIR /app
 
 COPY requirements.txt ./
 
+RUN #mkdir "images"
 
 RUN set -xe && apt-get update
 RUN apt-get install python3-pip -y
