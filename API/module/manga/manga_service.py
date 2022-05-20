@@ -9,6 +9,9 @@ class MangaService:
         self.file_manager = file_manager
         self.manga_repository = manga_repository
 
+    async def get_mangas(self):
+        return await self.manga_repository.find_all()
+
     async def add_manga(self, file: UploadFile, name: str) -> None:
-        filename = await self.file_manager.save(file)
-        await self.manga_repository.insert(name, filename)
+        filename, extension = await self.file_manager.save(file)
+        await self.manga_repository.insert(name, filename, extension)

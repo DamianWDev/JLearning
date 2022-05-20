@@ -16,4 +16,5 @@ class Database:
 
     async def create_database(self) -> None:
         async with self._engine.begin() as conn:
-            await conn.run_sync(Base.meta.create_all)
+            await conn.run_sync(Base.metadata.drop_all)
+            await conn.run_sync(Base.metadata.create_all)

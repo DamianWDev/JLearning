@@ -1,4 +1,5 @@
 import uuid
+
 from aiofile import AIOFile
 from fastapi import UploadFile
 
@@ -14,28 +15,17 @@ class FileNotFoundException(Exception):
 
 
 class FileManager:
-
-    # async def find(self, filename: str) -> bytes:
-    #     path = self.build_path(filename)
-    #
-    #     async with AIOFile(path, "rb+") as afp:
-    #         file_bytes = await afp.read()
-    #         if file_bytes == 0:
-    #             raise FileNotFoundException
-    #         else:
-    #             return file_bytes
-
-    async def save(self, file: UploadFile) -> str:
+    async def save(self, file: UploadFile) -> (str, str):
         extension: str = self.__get_valid_extension(file.filename)
         filename: str = str(uuid.uuid4())
-        path = self.__build_path(f"{filename}.{extension}")
+        path = self.__build_path(filename, extension)
 
         async with AIOFile(path, 'wb+') as afp:
             await afp.write(await file.read())
-            return filename
+            return filename, extension
 
-    def __build_path(self, filename: str) -> str:
-        return f"{TEST_UPLOAD_FOLDER}/{filename}"
+    def __build_path(self, filename: str, extension: str) -> str:
+        return f"{TEST_UPLOAD_FOLDER}/{filename}.{extension}"
 
     def __get_valid_extension(self, name: str) -> str:
         if '.' in name:

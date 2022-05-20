@@ -9,6 +9,7 @@ class Manga(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(255))
     img_path = Column(String(255))
+    format = Column(String(4))
 
     def __repr__(self):
         return f"""
