@@ -1,7 +1,7 @@
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String
 
-from base import Base
+from API.module.db.database import Base
 
 
 class Volume(Base):

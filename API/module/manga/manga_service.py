@@ -1,9 +1,14 @@
-from manga_repository import MangaRepository
+from fastapi import UploadFile
+
+from API.module.manga.manga_repository import MangaRepository
+from API.module.shared.file_manager import FileManager
 
 
 class MangaService:
-    def __init__(self, manga_repository: MangaRepository):
+    def __init__(self, file_manager: FileManager, manga_repository: MangaRepository) -> None:
+        self.file_manager = file_manager
         self.manga_repository = manga_repository
 
-    async def add_manga(self, name: str, img_path: str) -> None:
-        await self.manga_repository.insert(name, img_path)
+    async def add_manga(self, file: UploadFile, name: str) -> None:
+        filename = await self.file_manager.save(file)
+        await self.manga_repository.insert(name, filename)

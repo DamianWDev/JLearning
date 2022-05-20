@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String
 
-from base import Base
+from API.module.db.database import Base
 
 
 class Manga(Base):

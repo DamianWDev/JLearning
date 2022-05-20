@@ -1,8 +1,4 @@
-Flask>=2
-SqlAlchemy>=1
-Flask-RESTful>=0
-psycopg2>=2
-#pg8000==1.24.1
-flask_sqlalchemy>=2
-flask-cors==3.0.10
-aiofile==3.7.4
+# fastapi>=0.78
+SqlAlchemy>=1.4
+asyncpg>=2.8
+aiofile>=3.7.4

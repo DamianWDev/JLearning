@@ -1,53 +1,43 @@
-from flask import Flask
-from sqlalchemy import create_engine
-from flask_cors import CORS
-from flask_sqlalchemy import SQLAlchemy
-from consts import DB_STRING, UPLOAD_FOLDER
-from manga.manga_controller import manga_bp
+from fastapi import FastAPI
+from API.container import Container
+from API.module.manga import manga_route
+from fastapi.middleware.cors import CORSMiddleware
 
-from .module.domain.base import Base
-from logging.config import dictConfig
+# from logging.config import dictConfig
+origins = [
+    "http://localhost",
+    "http://localhost:8080",
+]
 
-dictConfig({
-    'version': 1,
-    'formatters': {'default': {
-        'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
-    }},
-    'handlers': {'wsgi': {
-        'class': 'logging.StreamHandler',
-        'stream': 'ext://flask.logging.wsgi_errors_stream',
-        'formatter': 'default'
-    }},
-    'root': {
-        'level': 'INFO',
-        'handlers': ['wsgi']
-    }
-})
+# dictConfig({
+#     'version': 1,
+#     'formatters': {'default': {
+#         'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
+#     }},
+#     'handlers': {'wsgi': {
+#         'class': 'logging.StreamHandler',
+#         'stream': 'ext://flask.logging.wsgi_errors_stream',
+#         'formatter': 'default'
+#     }},
+#     'root': {
+#         'level': 'INFO',
+#         'handlers': ['wsgi']
+#     }
+# })
+container = Container()
 
-app = Flask(__name__)
-app.register_blueprint(manga_bp)
+db = container.db()
 
-app.config['SQLALCHEMY_DATABASE_URI'] = DB_STRING
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.secret_key = 'super secret key'
+# TODO: Remove await warning
+db.create_database()
 
-# CORS applied on all routes
-CORS(app)
-
-db = SQLAlchemy(app)
-
-
-def db_test():
-    try:
-        engine = create_engine(DB_STRING, echo=True, future=True)
-        print("Connection finalized")
-    except Exception as e:
-        print("connecting error")
-    Base.metadata.create_all(engine)
-    print("Created structure")
-
-
-db_test()
-
-if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+app.container = container
+app.include_router(manga_route.router)

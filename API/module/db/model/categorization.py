@@ -2,7 +2,7 @@ from sqlalchemy.orm import relationship
 
 from sqlalchemy import Column
 from sqlalchemy import Integer, ForeignKey
-from base import Base
+from API.module.db.database import Base
 
 
 class Categorization(Base):

@@ -1,5 +1,5 @@
 from sqlalchemy import Column, ForeignKey, Integer, String
-from base import Base
+from API.module.db.database import Base
 
 
 class Pronunciation(Base):
