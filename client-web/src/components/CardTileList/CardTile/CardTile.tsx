@@ -1,3 +1,5 @@
+import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 import { CardTileImage } from "./CardTileImage";
 import { CardTileTitle } from "./CardTileTitle";
 import { CardTileUnderline } from "./CardTileUnderline";
@@ -9,7 +11,7 @@ interface CardTileProps {
 }
 
 export function CardTile({ image, title }: CardTileProps) {
-    return <div style={{ width: "150px", display: "inline-block", flex:"0 1 auto", alignSelf:"left"}}>
+    return <div style={{ width: "150px", display: "inline-block", flex: "0 1 auto", alignSelf: "left" }}>
         <CardTileImage
             imageUrl={image}
             title={title}
@@ -18,5 +20,11 @@ export function CardTile({ image, title }: CardTileProps) {
             title={title}
         />
         <CardTileUnderline />
+        <Link to={`${title}`} >
+
+          <Button>
+            help
+          </Button>
+        </Link>
     </div>
 }

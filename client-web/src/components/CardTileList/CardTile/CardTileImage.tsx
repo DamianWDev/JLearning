@@ -13,6 +13,7 @@ const CardTileImageStyled = styled('img')(({ theme }) => ({
     boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.75)',
     transition: '0.3s',
     '&:hover': {
+
         boxShadow: '0px 0px 10px 0px rgba(243, 120, 44,0.75)',
     },
 }));
@@ -38,6 +39,7 @@ export function CardTileImage({ imageUrl, title }: ImgaeCardImageProp) {
             style={{
                 transform: `${hovered ? 'scale(1.1,1.1)' : 'scale(1,1)'}`,
                 cursor: `${hovered ? 'pointer' : 'default'}`,
+                filter: `${hovered ? "brightness(30%)" : "brightness(100%)"}`,
             }}
         />
     </div>
