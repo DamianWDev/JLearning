@@ -1,7 +1,8 @@
-Flask==2.1.2
-SqlAlchemy==1.4.36
-Flask-RESTful==0.3.9
-psycopg2==2.9.3
-#pg8000==1.24.1
-flask_sqlalchemy==2.5.1
-flask-cors==3.0.10
+fastapi~=0.78.0
+SQLAlchemy~=1.4.32
+aiofile~=3.7.4
+uvicorn~=0.17.6
+dependency-injector~=4.39.1
+python-multipart~=0.0.5
+asyncpg~=0.25.0
+alembic~=1.7.7
