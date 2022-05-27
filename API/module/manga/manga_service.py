@@ -1,5 +1,4 @@
 from fastapi import UploadFile
-
 from API.module.manga.manga_repository import MangaRepository
 from API.module.shared.file_manager import FileManager
 
@@ -13,5 +12,5 @@ class MangaService:
         return await self.manga_repository.find_all()
 
     async def add_manga(self, file: UploadFile, name: str) -> None:
-        filename, extension = await self.file_manager.save(file)
-        await self.manga_repository.insert(name, filename, extension)
+        filename, img_extension = await self.file_manager.save(file)
+        await self.manga_repository.insert(name, filename, img_extension)

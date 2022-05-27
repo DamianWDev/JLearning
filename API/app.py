@@ -1,8 +1,7 @@
 from fastapi import FastAPI
-
+from fastapi.middleware.cors import CORSMiddleware
 from API.container import Container
 from API.module.manga import manga_route
-from fastapi.middleware.cors import CORSMiddleware
 
 origins = [
     "http://localhost",

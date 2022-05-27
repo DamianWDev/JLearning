@@ -1,6 +1,5 @@
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, Unicode, String
-
 from API.module.db.database import Base
 
 
@@ -12,6 +11,7 @@ class Kanji(Base):
     strokes = Column(Integer)
     level = Column(Integer)
     img_path = Column(String(255))
+    img_extension = Column(String(4))
     url = Column(String(255))
 
     kanji_occurrence_collection = relationship("KanjiOccurrence", back_populates='kanji_kanji_occurrence')
@@ -25,6 +25,7 @@ class Kanji(Base):
         character={self.character}, 
         strokes={self.strokes}, 
         level={self.level},
-        img_path{self.img_path}, 
+        img_path={self.img_path}, 
+        img_extension={self.img_extension},
         url={self.url})
         """

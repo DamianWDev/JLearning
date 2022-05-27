@@ -1,9 +1,7 @@
 import uuid
-
 from aiofile import AIOFile
 from fastapi import UploadFile
-
-from API.consts import TEST_UPLOAD_FOLDER, ALLOWED_EXTENSIONS
+from API.module.shared.consts import TEST_UPLOAD_FOLDER, ALLOWED_EXTENSIONS
 
 
 class UnsupportedExtensionException(Exception):

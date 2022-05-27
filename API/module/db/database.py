@@ -1,7 +1,7 @@
 import logging
-from API.consts import DB_STRING
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import declarative_base, sessionmaker
+from API.module.shared.consts import DB_CONNECTION_STRING
 
 logger = logging.getLogger(__name__)
 
@@ -10,7 +10,7 @@ Base = declarative_base()
 
 class Database:
 
-    def __init__(self, db_url: str = DB_STRING) -> None:
+    def __init__(self, db_url: str = DB_CONNECTION_STRING) -> None:
         self._engine = create_async_engine(db_url, future=True, echo=True)
         self.session_maker = sessionmaker(self._engine, expire_on_commit=False, class_=AsyncSession)
 

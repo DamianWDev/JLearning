@@ -1,7 +1,6 @@
 from dependency_injector.wiring import inject, Provide
 from fastapi import APIRouter, Depends, UploadFile, status, HTTPException, Form
 from fastapi.responses import ORJSONResponse
-
 from API.module.manga.manga_service import MangaService
 from API.container import Container
 from API.module.shared.file_manager import UnsupportedExtensionException
@@ -11,7 +10,7 @@ router = APIRouter(
 )
 
 
-@router.get('/mangas/', status_code=status.HTTP_201_CREATED, response_class=ORJSONResponse)
+@router.get('/mangas/', status_code=status.HTTP_200_OK, response_class=ORJSONResponse)
 @inject
 async def get_mangas(manga_service: MangaService = Depends(Provide(Container.manga_service))):
     return await manga_service.get_mangas()

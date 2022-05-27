@@ -1,4 +1,8 @@
-# fastapi>=0.78
-SqlAlchemy>=1.4
-asyncpg>=2.8
-aiofile>=3.7.4
+fastapi~=0.78.0
+SQLAlchemy~=1.4.32
+aiofile~=3.7.4
+uvicorn~=0.17.6
+dependency-injector~=4.39.1
+python-multipart~=0.0.5
+asyncpg~=0.25.0
+alembic~=1.7.7

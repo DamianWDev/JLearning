@@ -1,6 +1,5 @@
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String
-
 from API.module.db.database import Base
 
 
@@ -11,6 +10,7 @@ class Volume(Base):
     volume_number = Column(Integer)
     manga_id = Column(Integer)
     img_path = Column(String(255))
+    img_extension = Column(String(4))
 
     kanji_occurrence_collection = relationship("KanjiOccurrence", back_populates="volume_kanji_occurrence")
 
@@ -19,5 +19,6 @@ class Volume(Base):
         Volume(id={self.id}, 
         volume_number={self.volume_number}, 
         manga_id={self.manga_id}, 
-        img_path={self.img_path})
+        img_path={self.img_path}, 
+        img_extension={self.img_extension}
         """
